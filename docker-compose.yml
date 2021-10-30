@@ -1,11 +1,29 @@
 version: '3.4'
 services:
-  shelly-plug-influxdb:
+  shelly-plug-influxdb-dev:
     build:
       context: .
       dockerfile: Dockerfile
-#    environment:
-#      USER_UID: ${USER_UID:-1000}
-#      USER_GID: ${USER_GID:-1000}
-#    volumes:
-#      - ./:./app
+      target: development
+    environment:
+      SHELLY_PLUG_IP: '192.168.1.171'
+      SHELLY_PLUG_USER: 'admin'
+      SHELLY_PLUG_PASSWORD: 'admin'
+      INFLUXDB_HOST: 'influxdb'
+      INFLUXDB_PORT: '8086'
+      INFLUXDB_DB: 'shelly-plug'
+      INFLUXDB_ADMIN_USER: 'admin'
+      INFLUXDB_ADMIN_PASSWORD: 'password'
+    volumes:
+      - .:/app
+  influxdb:
+    image: influxdb:1.8
+    ports:
+      - "8086:8086"
+    environment:
+      INFLUXDB_ADMIN_USER: 'admin'
+      INFLUXDB_ADMIN_PASSWORD: 'password'
+  influxdb-ui:
+    image: sillydong/influxdb-ui
+    ports:
+      - "8080:80"

@@ -7,6 +7,6 @@
 # Run scheduler (poor man crontab ;)
 while [[ true ]]
 do
-  cd /app && php
+  cd /app && php scrapper.php
   sleep 60
 done

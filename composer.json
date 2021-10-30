@@ -9,6 +9,11 @@
     ],
     "require": {
         "php": "^8.0",
-        "ext-json": "*"
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.4",
+        "influxdb/influxdb-php": "^1.15"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.3"
     }
 }
