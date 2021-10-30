@@ -56,7 +56,7 @@ foreach ($fields as $name => $value) {
         $value,
         [ 'name' => $plugName, 'ip' => $plugHost ],
         [],
-        $meter->timestamp
+        microtime()
     );
 }
 
