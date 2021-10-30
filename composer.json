@@ -1,0 +1,14 @@
+{
+    "name": "knobik/shelly-plug-influxdb",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "knobik"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "ext-json": "*"
+    }
+}
