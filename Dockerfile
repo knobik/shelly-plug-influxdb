@@ -1,4 +1,3 @@
-# base configuration
 FROM ubuntu:18.04
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -15,6 +14,9 @@ RUN apt-get update && \
     php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer && \
     mkdir /run/php && \
     apt-get -y autoremove && apt-get clean
+
+RUN git clone git@github.com:knobik/shelly-plug-influxdb.git /app && \
+    composer install -d /app
 
 # configure crontab
 COPY schedule.sh /schedule.sh
