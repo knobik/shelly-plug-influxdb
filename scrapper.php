@@ -12,6 +12,11 @@ function env(string $name, $default = null)
     return $value === false ? $default : $value;
 }
 
+function milliseconds(): int {
+    $mt = explode(' ', microtime());
+    return ((int)$mt[1]) * 1000 + ((int)round($mt[0] * 1000));
+}
+
 $plugName = env('SHELLY_PLUG_NAME', 'plug1');
 $plugHost = env('SHELLY_PLUG_IP');
 $plugUser = env('SHELLY_PLUG_USER');
@@ -56,7 +61,7 @@ foreach ($fields as $name => $value) {
         $value,
         [ 'name' => $plugName, 'ip' => $plugHost ],
         [],
-        microtime()
+        milliseconds()
     );
 }
 
