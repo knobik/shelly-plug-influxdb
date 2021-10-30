@@ -30,7 +30,7 @@ ENTRYPOINT ["/schedule.sh"]
 
 FROM base as production
 
-RUN git clone git@github.com:knobik/shelly-plug-influxdb.git /app && \
+RUN git clone https://github.com/knobik/shelly-plug-influxdb.git /app && \
     composer install --no-dev -d /app
 
 ENTRYPOINT ["/schedule.sh"]
