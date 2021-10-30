@@ -1,6 +1,8 @@
 FROM ubuntu:18.04 as base
 ENV DEBIAN_FRONTEND=noninteractive
 
+ENV CACHE_VERSION = "1.0.7"
+
 # install required packages
 RUN apt-get update && apt-get install -y software-properties-common curl git
 
