@@ -16,6 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 4,
+  "iteration": 1635707688333,
   "links": [],
   "panels": [
     {
@@ -46,7 +47,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 0
       },
@@ -59,6 +60,83 @@
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.4.3",
+      "targets": [
+        {
+          "groupBy": [],
+          "limit": "1",
+          "measurement": "power",
+          "orderByTime": "DESC",
+          "policy": "default",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "name",
+              "operator": "=~",
+              "value": "/^$name$/"
+            }
+          ]
+        }
+      ],
+      "title": "Current power consumption",
+      "type": "stat"
+    },
+    {
+      "datasource": "InfluxDB-shelly-plug",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              }
+            ]
+          },
+          "unit": "watth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
           ],
           "fields": "",
           "values": false
@@ -99,7 +177,13 @@
               },
               {
                 "params": [],
-                "type": "last"
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "/60"
+                ],
+                "type": "math"
               }
             ]
           ],
@@ -112,7 +196,8 @@
           ]
         }
       ],
-      "title": "Current power consumption",
+      "title": "Total power consumption in time range",
+      "transformations": [],
       "type": "stat"
     },
     {
@@ -139,11 +224,11 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 12,
+        "w": 8,
+        "x": 16,
         "y": 0
       },
-      "id": 6,
+      "id": 9,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -162,24 +247,13 @@
       "pluginVersion": "7.4.3",
       "targets": [
         {
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
+          "groupBy": [],
           "measurement": "total",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT last(\"value\")  / 60 FROM \"total\" WHERE (\"name\" =~ /^$name$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
           "queryType": "randomWalk",
+          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -189,10 +263,6 @@
                   "value"
                 ],
                 "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
               },
               {
                 "params": [
@@ -211,7 +281,7 @@
           ]
         }
       ],
-      "title": "Total power consumption",
+      "title": "Total power consumption saved on device",
       "transformations": [],
       "type": "stat"
     },
@@ -483,7 +553,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "plug1",
           "value": "plug1"
         },
@@ -531,5 +601,5 @@
   "timezone": "",
   "title": "Shelly Plug",
   "uid": "mD-545Fnk",
-  "version": 5
+  "version": 9
 }
