@@ -1,8 +1,6 @@
 FROM ubuntu:18.04 as base
 ENV DEBIAN_FRONTEND=noninteractive
 
-ENV CACHE_VERSION = "1.0.7"
-
 # install required packages
 RUN apt-get update && apt-get install -y software-properties-common curl git
 
@@ -34,5 +32,7 @@ FROM base as production
 
 RUN git clone https://github.com/knobik/shelly-plug-influxdb.git /app && \
     composer install --no-dev -d /app
+
+WORKDIR /app
 
 ENTRYPOINT ["/schedule.sh"]
