@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 4,
-  "iteration": 1635707688333,
+  "iteration": 1635758253349,
   "links": [],
   "panels": [
     {
@@ -46,8 +46,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 8,
+        "h": 6,
+        "w": 12,
         "x": 0,
         "y": 0
       },
@@ -123,12 +123,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
+        "h": 6,
+        "w": 12,
+        "x": 12,
         "y": 0
       },
-      "id": 6,
+      "id": 9,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -150,13 +150,13 @@
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "1s"
               ],
               "type": "time"
             },
             {
               "params": [
-                "null"
+                "0"
               ],
               "type": "fill"
             }
@@ -201,91 +201,6 @@
       "type": "stat"
     },
     {
-      "datasource": "InfluxDB-shelly-plug",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {},
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              }
-            ]
-          },
-          "unit": "watth"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 16,
-        "y": 0
-      },
-      "id": 9,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.4.3",
-      "targets": [
-        {
-          "groupBy": [],
-          "measurement": "total",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT last(\"value\")  / 60 FROM \"total\" WHERE (\"name\" =~ /^$name$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "queryType": "randomWalk",
-          "rawQuery": false,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [
-                  " / 60"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "name",
-              "operator": "=~",
-              "value": "/^$name$/"
-            }
-          ]
-        }
-      ],
-      "title": "Total power consumption saved on device",
-      "transformations": [],
-      "type": "stat"
-    },
-    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -308,7 +223,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 8
+        "y": 6
       },
       "hiddenSeries": false,
       "id": 2,
@@ -477,7 +392,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 6
       },
       "id": 8,
       "options": {
@@ -601,5 +516,5 @@
   "timezone": "",
   "title": "Shelly Plug",
   "uid": "mD-545Fnk",
-  "version": 9
+  "version": 11
 }
